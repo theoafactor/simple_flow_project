@@ -21,7 +21,7 @@ jobs:
           env: 
             version: ${{ steps.created-output.outputs.username }}
           run: |
-            docker build -t theoafactor/simple_flow_app:$version
+            docker build -t theoafactor/simple_flow_app:$version .
 
 
 
