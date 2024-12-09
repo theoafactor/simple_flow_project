@@ -1,0 +1,23 @@
+name: "First Deployment"
+on: 
+    push: 
+        branches: 
+            - master
+
+jobs: 
+    simple_deployment:
+        runs-on: ubuntu-latest
+        steps: 
+        - name: checkouts out
+          uses: actions/checkout@v4
+          
+        - name: "Create variable"
+          id: created-output
+          run: |
+            echo "username=James" >> $GITHUB_OUTPUT
+
+        - name: "Use variable"
+          run: |
+            echo ${{ steps.created-output.outputs.username }}
+
+  
