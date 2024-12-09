@@ -7,6 +7,8 @@ on:
 jobs: 
     simple_deployment:
         runs-on: ubuntu-latest
+        outputs: 
+            version: "2"
         steps: 
         - name: checkouts out
           uses: actions/checkout@v4
@@ -37,8 +39,9 @@ jobs:
         runs-on: ubuntu-latest
         needs: 
             - simple_deployment
-        outputs: 
-            version: ${{ needs.simple_deployment.outputs.version_num }}
+        steps: 
+        - name: "Get outputs"
+          run: echo ${{ needs.simple_deployment.outputs.version }}
 
 
   
