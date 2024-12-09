@@ -14,12 +14,22 @@ jobs:
         - name: "Create variable"
           id: created-output
           run: |
-            echo "username=James" >> $GITHUB_OUTPUT
-            echo "another=John" >> $GITHUB_OUTPUT
+            date_value=$( echo $(date) )
+
+            current_time=$( echo $date_value | cut -d" " -f5 )
+            # 14:58:51
+            current_hour=$( echo $current_time | cut -d":" -f1 )
+            current_min=$( echo $current_time | cut -d":" -f2 )
+            current_sec=$( echo $current_time | cut -d":" -f3 )
+            total="$current_hour"_"$current_min"_"$current_sec"
+            random_num=$( echo $RANDOM )
+            version_number="$total"_"$random_num"
+            echo "version_num=$( echo $version_number )" >> $GITHUB_OUTPUT
+    
 
         - name: "Use variable"
           env: 
-            version: ${{ steps.created-output.outputs.username }}
+            version: ${{ steps.created-output.outputs.version_num }}
           run: |
             docker build -t theoafactor/simple_flow_app:$version .
 
