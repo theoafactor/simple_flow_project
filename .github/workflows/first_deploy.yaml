@@ -15,9 +15,14 @@ jobs:
           id: created-output
           run: |
             echo "username=James" >> $GITHUB_OUTPUT
+            echo "another=John" >> $GITHUB_OUTPUT
 
         - name: "Use variable"
+          env: 
+            version: ${{ steps.created-output.outputs.username }}
           run: |
-            echo ${{ steps.created-output.outputs.username }}
+            docker build -t theoafactor/simple_flow_app:$version
+
+
 
   
