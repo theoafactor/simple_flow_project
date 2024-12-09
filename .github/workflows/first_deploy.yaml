@@ -43,6 +43,16 @@ jobs:
             echo $DOCKER_TAG
             docker build -t theoafactor/simple_flow_app:$DOCKER_TAG .
 
+        - name: "Login to DockerHub"
+          run: |
+            docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+        - name: "Push to Docker Hub"
+          run: |
+            docker push theoafactor/simple_flow_app:$DOCKER_TAG
+
+
+
 
 
   
