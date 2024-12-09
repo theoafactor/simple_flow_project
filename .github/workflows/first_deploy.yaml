@@ -37,10 +37,12 @@ jobs:
         steps: 
         - name: checkouts out
           uses: actions/checkout@v4
-          
+
         - name: "Use variable"       
           run: |
+            echo $DOCKER_TAG
             docker build -t theoafactor/simple_flow_app:$DOCKER_TAG .
+
 
 
   
